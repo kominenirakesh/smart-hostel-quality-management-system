@@ -98,7 +98,111 @@ const joinHostel = async (req, res, next) => {
     next(error);
   }
 };
+const assignSupervisor = async (req, res, next) => {
+  try {
+    const { hostelId } = req.params;
+    const { supervisorId } = req.body;
+
+    if (!supervisorId) {
+      return next(
+        new ApiError(
+          400,
+          "Supervisor ID is required"
+        )
+      );
+    }
+
+    const hostel = await Hostel.findById(hostelId);
+
+    if (!hostel) {
+      return next(
+        new ApiError(
+          404,
+          "Hostel not found"
+        )
+      );
+    }
+
+    // Owner ownership check
+    if (
+      hostel.ownerId.toString() !==
+      req.user.id
+    ) {
+      return next(
+        new ApiError(
+          403,
+          "You can only manage your own hostels"
+        )
+      );
+    }
+
+    // Hostel already has supervisor
+    if (hostel.supervisorId) {
+      return next(
+        new ApiError(
+          400,
+          "Supervisor already assigned"
+        )
+      );
+    }
+
+    const supervisor =
+      await User.findById(supervisorId);
+
+    if (!supervisor) {
+      return next(
+        new ApiError(
+          404,
+          "Supervisor not found"
+        )
+      );
+    }
+
+    if (
+      supervisor.role !== "supervisor"
+    ) {
+      return next(
+        new ApiError(
+          400,
+          "Selected user is not a supervisor"
+        )
+      );
+    }
+
+    // Version 1 Rule:
+    // One Supervisor → One Hostel
+
+    const alreadyAssigned =
+      await Hostel.findOne({
+        supervisorId,
+      });
+
+    if (alreadyAssigned) {
+      return next(
+        new ApiError(
+          400,
+          "Supervisor already assigned to another hostel"
+        )
+      );
+    }
+
+    hostel.supervisorId =
+      supervisor._id;
+
+    await hostel.save();
+
+    return res.status(200).json(
+      new ApiResponse(
+        200,
+        hostel,
+        "Supervisor assigned successfully"
+      )
+    );
+  } catch (error) {
+    next(error);
+  }
+};
 
 export {
-  createHostel,joinHostel
+  createHostel,joinHostel,assignSupervisor 
 };
