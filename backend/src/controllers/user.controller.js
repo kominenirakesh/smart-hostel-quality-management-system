@@ -4,11 +4,12 @@ import jwt from "jsonwebtoken";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 
+
 const registerUser = async (req, res, next) => {
 try {
 const { name, email, password, role } = req.body;
 
-```
+
 if (!name || !email || !password || !role) {
   return next(new ApiError(400, "All fields are required"));
 }
@@ -37,7 +38,7 @@ return res.status(201).json(
     "User registered successfully"
   )
 );
-```
+
 
 } catch (error) {
 next(error);
@@ -48,7 +49,7 @@ const loginUser = async (req, res, next) => {
 try {
 const { email, password } = req.body;
 
-```
+
 if (!email || !password) {
   return next(
     new ApiError(400, "Email and Password are required")
@@ -92,7 +93,7 @@ return res.status(200).json(
     "Login Successful"
   )
 );
-```
+
 
 } catch (error) {
 next(error);
