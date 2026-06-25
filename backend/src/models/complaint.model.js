@@ -41,6 +41,28 @@ const complaintSchema = new mongoose.Schema(
       default: null,
     },
 
+    aiAnalysis: {
+    predictedCategory: {
+        type: String,
+        default: null,
+    },
+
+    confidence: {
+        type: Number,
+        default: null,
+    },
+
+    summary: {
+        type: String,
+        default: "",
+    },
+
+    analyzedAt: {
+        type: Date,
+        default: null,
+    }
+    },
+
     status: {
       type: String,
       enum: [
