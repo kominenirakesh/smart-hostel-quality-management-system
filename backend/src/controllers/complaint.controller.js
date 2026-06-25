@@ -2,6 +2,7 @@ import Complaint from "../models/complaint.model.js";
 import User from "../models/user.model.js";
 import Hostel from "../models/hostel.model.js";
 import uploadOnCloudinary from "../utils/uploadOnCloudinary.js";
+import analyzeComplaintImage from "../services/aiAnalysis.service.js";
 // FIX: Removed unused `import { v2 as cloudinary } from "cloudinary"` and
 // `import path from "path"`. Both were leftover dead imports. Cloudinary is
 // accessed only through uploadOnCloudinary, which uses cloudinary.config.js.
@@ -15,51 +16,13 @@ const createComplaint = async (req, res, next) => {
     const category = req.body.category?.trim();
     const priority = req.body.priority?.trim();
 
-    let imageUrl = null;
-
-    if (req.file) {
-
-      try {
-
-        const uploadedImage =
-          await uploadOnCloudinary(req.file.path);
-
-        imageUrl = uploadedImage.secure_url;
-
-        console.log("Cloudinary Upload Success");
-        console.log(imageUrl);
-
-      } catch (error) {
-
-        console.error("Cloudinary Upload Failed");
-        console.error(error);
-
-        return next(
-          new ApiError(
-            500,
-            "Failed to upload image"
-          )
-        );
-
-      }
-
-    }
-
-    if (
-      !title ||
-      !description ||
-      !category
-    ) {
+    if (!title || !description || !category) {
       return next(
-        new ApiError(
-          400,
-          "All fields are required"
-        )
+        new ApiError(400, "All fields are required")
       );
     }
 
-    const student =
-      await User.findById(req.user.id);
+    const student = await User.findById(req.user.id);
 
     if (!student.hostelId) {
       return next(
@@ -70,17 +33,11 @@ const createComplaint = async (req, res, next) => {
       );
     }
 
-    const hostel =
-      await Hostel.findById(
-        student.hostelId
-      );
+    const hostel = await Hostel.findById(student.hostelId);
 
     if (!hostel) {
       return next(
-        new ApiError(
-          404,
-          "Hostel not found"
-        )
+        new ApiError(404, "Hostel not found")
       );
     }
 
@@ -93,33 +50,116 @@ const createComplaint = async (req, res, next) => {
       );
     }
 
-    const complaint =
-      await Complaint.create({
-        title,
-        description,
-        category,
-        priority,
-        imageUrl,
-        studentId:
-          student._id,
+    let imageUrl = null;
 
-        hostelId:
-          hostel._id,
+    if (req.file) {
+      try {
+        const uploadedImage = await uploadOnCloudinary(req.file.path);
 
-        supervisorId:
-          hostel.supervisorId
-      });
+        imageUrl = uploadedImage.secure_url;
+
+        console.log("Cloudinary Upload Success");
+        console.log(imageUrl);
+
+      } catch (error) {
+        console.error(error);
+
+        return next(
+          new ApiError(
+            500,
+            "Failed to upload image"
+          )
+        );
+      }
+    }
+
+    // ==========================
+    // AI ANALYSIS
+    // ==========================
+
+    let aiAnalysis = null;
+
+    if (imageUrl) {
+
+      try {
+
+        aiAnalysis =
+          await analyzeComplaintImage({
+            title,
+            description,
+            category,
+            imageUrl,
+          });
+
+      } catch (error) {
+
+        console.log("Gemini AI Failed");
+        console.log(error);
+
+      }
+
+    }
+
+    // ==========================
+    // CREATE COMPLAINT
+    // ==========================
+
+    const complaint = await Complaint.create({
+
+      title,
+      description,
+      category,
+      priority,
+
+      imageUrl,
+
+      aiAnalysis: aiAnalysis
+        ? {
+            predictedCategory:
+              aiAnalysis.predictedCategory,
+
+            confidence:
+              aiAnalysis.confidence,
+
+            summary:
+              aiAnalysis.summary,
+
+            issues:
+              aiAnalysis.issues,
+
+            severity:
+              aiAnalysis.severity,
+
+            analyzedAt:
+              new Date(),
+          }
+        : undefined,
+
+      studentId:
+        student._id,
+
+      hostelId:
+        hostel._id,
+
+      supervisorId:
+        hostel.supervisorId,
+
+    });
 
     return res.status(201).json(
+
       new ApiResponse(
         201,
         complaint,
         "Complaint created successfully"
       )
+
     );
 
   } catch (error) {
+
     next(error);
+
   }
 };
 
