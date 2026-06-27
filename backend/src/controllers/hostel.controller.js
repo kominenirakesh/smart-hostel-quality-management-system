@@ -40,6 +40,7 @@ const createHostel = async (req, res, next) => {
     next(error);
   }
 };
+
 const joinHostel = async (req, res, next) => {
   try {
 
@@ -98,6 +99,7 @@ const joinHostel = async (req, res, next) => {
     next(error);
   }
 };
+
 const assignSupervisor = async (req, res, next) => {
   try {
     const { hostelId } = req.params;
@@ -206,3 +208,4 @@ const assignSupervisor = async (req, res, next) => {
 export {
   createHostel,joinHostel,assignSupervisor 
 };
+

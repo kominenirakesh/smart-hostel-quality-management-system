@@ -97,6 +97,7 @@ const createComplaint = async (req, res, next) => {
         console.log(error);
 
       }
+     console.log(aiAnalysis);
 
     }
 
@@ -339,7 +340,97 @@ const getMyComplaints = async (req, res, next) => {
     next(error);
   }
 };
+const getComplaintById = async (req, res, next) => {
+  try {
 
+    const { complaintId } = req.params;
+
+    const complaint = await Complaint.findOne({
+      _id: complaintId,
+      studentId: req.user.id
+    })
+      .populate(
+        "hostelId",
+        "hostelName city"
+      );
+
+    if (!complaint) {
+      return next(
+        new ApiError(
+          404,
+          "Complaint not found"
+        )
+      );
+    }
+
+    return res.status(200).json(
+      new ApiResponse(
+        200,
+        complaint,
+        "Complaint fetched successfully"
+      )
+    );
+
+  } catch (error) {
+    next(error);
+  }
+};
+const getSupervisorComplaintById = async (req, res, next) => {
+  try {
+
+    const { complaintId } = req.params;
+
+    const complaint = await Complaint.findOne({
+
+      _id: complaintId,
+
+      supervisorId: req.user.id
+
+    })
+
+      .populate(
+        "studentId",
+        "name email"
+      )
+
+      .populate(
+        "hostelId",
+        "hostelName city"
+      );
+
+    if (!complaint) {
+
+      return next(
+
+        new ApiError(
+          404,
+          "Complaint not found"
+        )
+
+      );
+
+    }
+
+    return res.status(200).json(
+
+      new ApiResponse(
+
+        200,
+
+        complaint,
+
+        "Complaint fetched successfully"
+
+      )
+
+    );
+
+  } catch (error) {
+
+    next(error);
+
+  }
+};
 const reopenComplaint = async (req, res, next) => {
   try {
     const { complaintId } = req.params;
@@ -391,4 +482,4 @@ const reopenComplaint = async (req, res, next) => {
   }
 };
 
-export { createComplaint, getSupervisorComplaints, updateComplaint, getMyComplaints, reopenComplaint };
+export { createComplaint, getSupervisorComplaints, updateComplaint, getMyComplaints, reopenComplaint,getComplaintById,getSupervisorComplaintById };

@@ -1,0 +1,452 @@
+/* ============================================================
+my-complaints.css
+Smart Hostel Quality Management System
+Designed by Principal Frontend Architect
+============================================================ */
+
+/* ----------------------------------------------------------
+
+1. PAGE LAYOUT SHELL
+---------------------------------------------------------- */
+.my-complaints-page {
+display: flex;
+flex-direction: column;
+gap: var(--space-6);
+padding: var(--space-8) var(--space-10);
+max-width: 1400px;
+margin: 0 auto;
+width: 100%;
+box-sizing: border-box;
+font-family: var(--font-sans);
+color: var(--text-primary);
+background-color: var(--surface-page);
+min-height: 100vh;
+}
+
+/* ----------------------------------------------------------
+2. REFINED HERO HEADER
+---------------------------------------------------------- */
+/* ----------------------------------------------------------
+2. PREMIUM HERO HEADER
+---------------------------------------------------------- */
+
+.my-complaints-page .page-header {
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    min-height: 150px;
+
+    padding: 2.5rem 3rem;
+
+    border-radius: 22px;
+
+    background: linear-gradient(
+        135deg,
+        #4f46e5 0%,
+        #4338ca 45%,
+        #3730a3 100%
+    );
+
+    box-shadow:
+        0 18px 45px rgba(79,70,229,.22);
+
+    isolation: isolate;
+}
+
+.my-complaints-page .page-header::before{
+    content:"";
+
+    position:absolute;
+
+    width:340px;
+    height:340px;
+
+    right:-140px;
+    top:-140px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    z-index:-1;
+}
+
+.my-complaints-page .page-header::after{
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    left:-90px;
+    bottom:-120px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+
+    z-index:-1;
+}
+
+.my-complaints-page .page-header h2{
+
+    margin:0;
+
+    color:#fff;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    letter-spacing:-.03em;
+
+    line-height:1.2;
+}
+
+.my-complaints-page .page-header p{
+
+    margin-top:14px;
+
+    max-width:640px;
+
+    color:rgba(255,255,255,.88);
+
+    font-size:1.05rem;
+
+    line-height:1.7;
+}
+.my-complaints-page .page-header::after {
+content: "";
+position: absolute;
+inset: 0;
+background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 60%);
+pointer-events: none;
+}
+
+.my-complaints-page .page-header h2 {
+font-size: 1.375rem;
+font-weight: 600;
+color: var(--text-inverse);
+margin: 0;
+letter-spacing: -0.02em;
+line-height: 1.3;
+}
+
+.my-complaints-page .page-header p {
+font-size: 0.875rem;
+color: var(--brand-primary-lt);
+margin: 0;
+opacity: 0.85;
+line-height: 1.5;
+max-width: 500px;
+}
+
+/* ----------------------------------------------------------
+3. SEARCH BAR & FILTERS UTILITIES
+---------------------------------------------------------- */
+.complaints-toolbar {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: var(--space-4);
+flex-wrap: wrap;
+width: 100%;
+}
+
+.search-container {
+position: relative;
+width: 100%;
+max-width: 400px;
+}
+
+.search-input {
+width: 100%;
+height: 36px;
+padding: 0 var(--space-3) 0 var(--space-9);
+font-family: var(--font-sans);
+font-size: 0.875rem;
+background: var(--surface-card);
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius-sm);
+color: var(--text-primary);
+box-shadow: var(--shadow-card);
+transition: all var(--transition-fast);
+}
+
+.search-input:focus {
+outline: none;
+border-color: var(--brand-primary);
+box-shadow: 0 0 0 1px var(--brand-primary), var(--shadow-card);
+}
+
+.search-icon {
+position: absolute;
+left: var(--space-3);
+top: 50%;
+transform: translateY(-50%);
+color: var(--text-muted);
+pointer-events: none;
+font-size: 0.875rem;
+}
+
+.filter-container {
+display: flex;
+align-items: center;
+gap: var(--space-2);
+flex-wrap: wrap;
+}
+
+.filter-pill {
+font-family: var(--font-sans);
+font-size: 0.8125rem;
+font-weight: 500;
+color: var(--text-secondary);
+background: transparent;
+border: 1px solid transparent;
+padding: var(--space-1) var(--space-3);
+border-radius: 100px;
+cursor: pointer;
+transition: all var(--transition-fast);
+}
+
+.filter-pill:hover {
+color: var(--text-primary);
+background: rgba(0, 0, 0, 0.04);
+}
+
+.filter-pill.active {
+color: var(--brand-primary);
+background: var(--brand-primary-lt);
+border-color: var(--brand-primary-md);
+font-weight: 600;
+}
+
+/* ----------------------------------------------------------
+4. COMPLAINTS LIST CONTAINER
+---------------------------------------------------------- */
+.complaints-list {
+display: flex;
+flex-direction: column;
+gap: var(--space-3);
+width: 100%;
+}
+
+/* ----------------------------------------------------------
+5. MINIMALIST HIGH-END COMPLAINT CARDS
+---------------------------------------------------------- */
+.complaint-card {
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+background: var(--surface-card);
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+padding: var(--space-4) var(--space-5);
+text-decoration: none !important;
+color: inherit;
+box-sizing: border-box;
+box-shadow: var(--shadow-card);
+transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.complaint-card:hover {
+transform: translateY(-1px);
+border-color: var(--brand-primary-md);
+box-shadow: var(--shadow-hover);
+}
+
+.complaint-card:focus-visible {
+outline: 2px solid var(--brand-primary);
+outline-offset: 2px;
+}
+
+/* Card Top Section Layout */
+.complaint-card-top {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: var(--space-4);
+margin-bottom: var(--space-3);
+}
+
+.complaint-card-top h4 {
+font-size: 0.9375rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0 0 2px 0;
+letter-spacing: -0.01em;
+line-height: 1.4;
+}
+
+.complaint-card-top p {
+font-size: 0.8125rem;
+color: var(--text-muted);
+margin: 0;
+text-transform: capitalize;
+}
+
+/* Card Bottom Section Layout */
+.complaint-card-bottom {
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-top: 1px solid rgba(0, 0, 0, 0.03);
+padding-top: var(--space-3);
+font-size: 0.8125rem;
+color: var(--text-secondary);
+}
+
+.complaint-card-bottom span:first-child {
+font-family: var(--font-sans);
+font-size: 0.8125rem;
+color: var(--text-muted);
+}
+
+.view-link {
+font-size: 0.8125rem;
+font-weight: 500;
+color: var(--brand-primary);
+display: inline-flex;
+align-items: center;
+gap: 4px;
+transition: transform var(--transition-fast);
+}
+
+.complaint-card:hover .view-link {
+transform: translateX(2px);
+}
+
+/* ----------------------------------------------------------
+6. ENTERPRISE STATUS BADGES
+---------------------------------------------------------- */
+.status-badge {
+display: inline-flex;
+align-items: center;
+font-size: 0.75rem;
+font-weight: 500;
+padding: 2px 8px;
+border-radius: 12px;
+line-height: 1.2;
+white-space: nowrap;
+}
+
+.status-badge.badge-pending {
+background-color: var(--color-warning-lt);
+color: var(--color-warning);
+border: 1px solid rgba(217, 119, 6, 0.15);
+}
+
+.status-badge.badge-review {
+background-color: var(--color-info-lt);
+color: var(--color-info);
+border: 1px solid rgba(2, 132, 199, 0.15);
+}
+
+.status-badge.badge-resolved {
+background-color: var(--color-success-lt);
+color: var(--color-success);
+border: 1px solid rgba(5, 150, 105, 0.15);
+}
+
+.status-badge.badge-rejected {
+background-color: var(--color-danger-lt);
+color: var(--color-danger);
+border: 1px solid rgba(220, 38, 36, 0.15);
+}
+
+/* ----------------------------------------------------------
+7. APPLICATION UI STATES
+---------------------------------------------------------- */
+.loading-state {
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 240px;
+font-size: 0.875rem;
+color: var(--text-secondary);
+}
+
+.empty-state {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: var(--space-12) var(--space-6);
+background: var(--surface-card);
+border: 1px dashed var(--border-color);
+border-radius: var(--border-radius-lg);
+margin-top: var(--space-4);
+}
+
+.empty-state::before {
+content: "📥";
+font-size: 1.75rem;
+margin-bottom: var(--space-3);
+opacity: 0.7;
+}
+
+.empty-state h3 {
+font-size: 0.9375rem;
+font-weight: 600;
+color: var(--text-primary);
+margin: 0 0 4px 0;
+}
+
+.empty-state p {
+font-size: 0.875rem;
+color: var(--text-muted);
+margin: 0;
+max-width: 280px;
+line-height: 1.5;
+}
+
+/* ----------------------------------------------------------
+8. RESPONSIVE BREAKPOINTS
+---------------------------------------------------------- */
+@media (max-width:768px){
+
+.my-complaints-page .page-header{
+
+    min-height:auto;
+
+    padding:2rem;
+
+}
+
+.my-complaints-page .page-header h2{
+
+    font-size:1.6rem;
+
+}
+
+.my-complaints-page .page-header p{
+
+    font-size:.95rem;
+
+}
+
+}
+
+@media (max-width: 480px) {
+.my-complaints-page {
+padding: var(--space-4) var(--space-4);
+}
+
+.complaint-card {
+padding: var(--space-4);
+}
+
+.complaint-card-top h4 {
+font-size: 0.875rem;
+}
+
+}

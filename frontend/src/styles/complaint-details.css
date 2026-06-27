@@ -1,0 +1,274 @@
+/* complaint-details.css
+   Enterprise layout for Complaint Details */
+
+.complaint-details-page{
+  max-width:1400px;
+  margin:0 auto;
+  padding:32px;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+  background:#f5f7fb;
+}
+
+.complaint-header-card{
+  background:linear-gradient(135deg,#ffffff,#f7f9ff);
+  border:1px solid #e5e7eb;
+  border-radius:24px;
+  padding:32px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.back-button{
+  border:none;
+  background:#eef2ff;
+  color:#4338ca;
+  padding:10px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.header-content{
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+.header-left h2{
+  font-size:2.2rem;
+  margin:.2rem 0;
+  line-height:1.15;
+}
+
+.meta-chips{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:16px 0;
+}
+
+.chip{
+  background:#eef2ff;
+  color:#4338ca;
+  padding:8px 14px;
+  border-radius:999px;
+  font-weight:600;
+}
+
+.header-right{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(150px,1fr));
+  gap:16px;
+}
+
+.info-box{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 4px 10px rgba(0,0,0,.04);
+}
+
+.label{
+  display:block;
+  color:#6b7280;
+  font-size:.75rem;
+  text-transform:uppercase;
+}
+
+.value{
+  display:block;
+  margin-top:6px;
+  font-size:1rem;
+  font-weight:700;
+}
+
+.description-card{
+  margin-top:24px;
+  background:#eef4ff;
+  border-left:5px solid #4f46e5;
+  padding:22px;
+  border-radius:16px;
+}
+
+.details-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:28px;
+}
+
+.left-section,.right-section{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+.right-section{
+  position:sticky;
+  top:24px;
+  align-self:start;
+}
+
+.details-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 8px 24px rgba(0,0,0,.05);
+}
+
+.section-header{
+  margin-bottom:20px;
+}
+
+.section-header h3{
+  margin:0;
+  font-size:1.2rem;
+}
+
+.ai-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.ai-item{
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  padding:18px;
+}
+
+.ai-item.full{
+  grid-column:1/-1;
+}
+
+.ai-item span{
+  display:block;
+  color:#6b7280;
+  font-size:.75rem;
+  margin-bottom:8px;
+  text-transform:uppercase;
+}
+
+.ai-item strong{
+  font-size:1.3rem;
+}
+
+.issues-list{
+  margin:0;
+  padding-left:18px;
+}
+
+.issues-list li{
+  margin-bottom:8px;
+}
+
+.complaint-image{
+  width:100%;
+  max-height:520px;
+  object-fit:cover;
+  border-radius:18px;
+}
+
+.image-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:16px;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.view-full-image{
+  color:#4338ca;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.timeline{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.timeline-item{
+  display:flex;
+  gap:16px;
+  position:relative;
+}
+
+.timeline-dot{
+  width:14px;
+  height:14px;
+  background:#cbd5e1;
+  border-radius:50%;
+  margin-top:6px;
+  flex-shrink:0;
+}
+
+.timeline-item.active .timeline-dot{
+  background:#4f46e5;
+}
+
+.timeline-line{
+  position:absolute;
+  left:6px;
+  top:22px;
+  width:2px;
+  height:calc(100% + 10px);
+  background:#d1d5db;
+}
+
+.status-chip{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  background:#eef2ff;
+  color:#4338ca;
+  font-weight:600;
+}
+
+.remarks-container{
+  background:#f8fafc;
+  border-radius:16px;
+  padding:18px;
+}
+
+.remarks-badge{
+  display:inline-block;
+  background:#dcfce7;
+  color:#166534;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:.8rem;
+  font-weight:700;
+  margin-bottom:14px;
+}
+
+.empty-remarks,.no-image-state,.empty-state,.loading-state{
+  text-align:center;
+  padding:40px 20px;
+  color:#6b7280;
+}
+
+@media(max-width:992px){
+.details-grid{grid-template-columns:1fr;}
+.right-section{position:static;}
+.header-right{grid-template-columns:1fr;}
+}
+
+@media(max-width:640px){
+.complaint-details-page{padding:16px;}
+.header-left h2{font-size:1.6rem;}
+.ai-grid{grid-template-columns:1fr;}
+}

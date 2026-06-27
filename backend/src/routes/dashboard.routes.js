@@ -5,11 +5,6 @@ import authorizeRoles from "../middleware/role.middleware.js";
 
 const router = Router();
 
-router.get(
-  "/owner",
-  verifyJWT,
-  authorizeRoles("owner"),
-  getOwnerDashboard
-);
+router.get("/owner",verifyJWT, authorizeRoles("owner"),getOwnerDashboard);
 
 export default router;

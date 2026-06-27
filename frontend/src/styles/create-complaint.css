@@ -1,0 +1,742 @@
+/* ============================================================
+   create-complaint.css
+   Continuation of student-dashboard.css design language.
+   Same tokens, same rhythm, same quality floor.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   Design tokens are inherited from StudentDashboard.css
+   which is imported first in the component tree.
+   All --var references below resolve from that :root block.
+   ---------------------------------------------------------- */
+
+/* ----------------------------------------------------------
+   1. PAGE SHELL
+   ---------------------------------------------------------- */
+.create-complaint-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  padding: var(--space-8) var(--space-10);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--surface-page);
+  min-height: 100vh;
+}
+
+/* ----------------------------------------------------------
+   2. PAGE HEADER — mirrors welcome-banner quality
+   ---------------------------------------------------------- */
+.create-complaint-page .page-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-8);
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 55%, #818cf8 100%);
+  border-radius: var(--border-radius-xl);
+  padding: var(--space-10) var(--space-12);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(79, 70, 229, 0.28);
+}
+
+.create-complaint-page .page-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 50%, rgba(255,255,255,.08) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 40% at 5%  80%, rgba(99,102,241,.30) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Decorative emblem on the right — pure CSS, no extra JSX */
+.create-complaint-page .page-header::after {
+  content: "📝";
+  position: absolute;
+  right: var(--space-12);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 4rem;
+  opacity: 0.14;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.create-complaint-page .page-header > div {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.create-complaint-page .page-header h2 {
+  margin: 0;
+  font-size: clamp(1.375rem, 2vw, 1.875rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.create-complaint-page .page-header p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 600px;
+  line-height: 1.65;
+}
+
+/* ----------------------------------------------------------
+   3. COMPLAINT GRID — two-column desktop layout
+   ---------------------------------------------------------- */
+.complaint-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* Right panel stacks its two children */
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* ----------------------------------------------------------
+   4. SHARED CARD BASE
+      complaint-card / upload-card / ai-card all share this shell
+   ---------------------------------------------------------- */
+.complaint-card,
+.upload-card,
+.ai-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--transition-base);
+  box-sizing: border-box;
+}
+
+.complaint-card:hover,
+.upload-card:hover {
+  box-shadow: var(--shadow-raised);
+}
+
+/* Card section headings */
+.complaint-card h3,
+.upload-card h3,
+.ai-card h3 {
+  margin: 0 0 var(--space-6);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ----------------------------------------------------------
+   5. FORM FIELDS
+   ---------------------------------------------------------- */
+
+/* Labels */
+.complaint-card label {
+  display: block;
+  margin: var(--space-5) 0 var(--space-2);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+/* First label in the card needs no top margin */
+.complaint-card label:first-of-type {
+  margin-top: 0;
+}
+
+/* Input & Select */
+.form-control,
+.form-select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-sans) !important;
+  font-size: 0.9375rem !important;
+  color: var(--text-primary) !important;
+  background: var(--surface-page) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+  padding: 11px var(--space-4) !important;
+  line-height: 1.5 !important;
+  box-shadow: none !important;
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow   var(--transition-fast),
+    background   var(--transition-fast);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.form-control:hover,
+.form-select:hover {
+  border-color: var(--brand-primary-md) !important;
+  background: var(--surface-card) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--brand-primary) !important;
+  background: var(--surface-card) !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12) !important;
+}
+
+/* Select arrow */
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239ca3af' d='M6 8L1 3h10z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  padding-right: 36px !important;
+  cursor: pointer;
+}
+
+/* Textarea */
+textarea.form-control {
+  resize: vertical;
+  min-height: 160px;
+  line-height: 1.65 !important;
+  padding-top: var(--space-3) !important;
+  padding-bottom: var(--space-3) !important;
+}
+
+/* Character counter */
+.complaint-card small {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* ----------------------------------------------------------
+   6. PRIORITY SELECTOR — premium pill buttons
+   ---------------------------------------------------------- */
+.priority-group {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.priority {
+  flex: 1;
+  min-width: 80px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid var(--border-color);
+  background: var(--surface-card);
+  border-radius: 100px;
+  padding: 10px var(--space-5);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition:
+    background      var(--transition-fast),
+    border-color    var(--transition-fast),
+    color           var(--transition-fast),
+    box-shadow      var(--transition-fast),
+    transform       var(--transition-fast);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.priority::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+/* Low */
+.priority:nth-child(1)         { --pill-color: var(--color-success); --pill-lt: var(--color-success-lt); }
+/* Medium */
+.priority:nth-child(2)         { --pill-color: var(--color-warning); --pill-lt: var(--color-warning-lt); }
+/* High */
+.priority:nth-child(3)         { --pill-color: var(--color-danger);  --pill-lt: var(--color-danger-lt);  }
+
+.priority:hover {
+  border-color: var(--pill-color);
+  color: var(--pill-color);
+  background: var(--pill-lt);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.07);
+}
+
+.priority:hover::before {
+  opacity: 0.8;
+}
+
+.priority.active {
+  background: var(--pill-color);
+  border-color: var(--pill-color);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+  transform: translateY(-1px);
+}
+
+.priority.active::before {
+  opacity: 1;
+  transform: scale(1.25);
+}
+
+/* ----------------------------------------------------------
+   7. IMAGE UPLOADER
+   ---------------------------------------------------------- */
+.upload-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 140px;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  background: var(--surface-page);
+  color: var(--brand-primary);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-align: center;
+  transition:
+    border-color var(--transition-base),
+    background   var(--transition-base),
+    color        var(--transition-base);
+  box-sizing: border-box;
+}
+
+.upload-btn:hover {
+  border-color: var(--brand-primary);
+  background: var(--brand-primary-lt);
+  color: var(--brand-primary);
+}
+
+/* Image preview card */
+.image-preview {
+  margin-top: var(--space-5);
+  background: var(--surface-page);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: box-shadow var(--transition-base);
+}
+
+.image-preview:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.image-preview p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+.image-preview p strong {
+  font-weight: 700;
+}
+
+.image-preview small {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Remove button — inherits Bootstrap btn-sm btn-outline-danger but we refine */
+.image-preview .btn {
+  align-self: flex-start;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  transition:
+    background    var(--transition-fast),
+    color         var(--transition-fast),
+    border-color  var(--transition-fast),
+    transform     var(--transition-fast);
+}
+
+.image-preview .btn:hover {
+  transform: translateY(-1px);
+}
+
+.image-preview .mt-2 { margin-top: var(--space-2) !important; }
+
+/* ----------------------------------------------------------
+   8. AI INFORMATION CARD
+   ---------------------------------------------------------- */
+.ai-card {
+  background: linear-gradient(145deg, #eef2ff 0%, #f0fdf4 100%);
+  border-color: var(--brand-primary-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-card::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(79,70,229,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ai-card h3 {
+  color: var(--brand-primary);
+  margin-bottom: var(--space-4);
+}
+
+.ai-card > p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4);
+  line-height: 1.65;
+}
+
+.ai-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ai-card li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(79, 70, 229, 0.12);
+  border-radius: var(--border-radius-sm);
+  backdrop-filter: blur(4px);
+}
+
+.ai-card li::before {
+  content: "✓";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: var(--brand-primary-lt);
+  color: var(--brand-primary);
+  border-radius: 50%;
+  font-size: 0.625rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------------------------
+   9. SUBMIT BUTTON
+   ---------------------------------------------------------- */
+.submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  margin-top: var(--space-6);
+  padding: 14px var(--space-6);
+  border: none;
+  border-radius: var(--border-radius);
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    box-shadow   var(--transition-base),
+    transform    var(--transition-base),
+    filter       var(--transition-base);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.32);
+}
+
+.submit-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.08) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.40);
+  filter: brightness(1.04);
+}
+
+.submit-btn:hover::before {
+  opacity: 1;
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.28);
+}
+
+.submit-btn:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 3px;
+}
+
+/* Loading-ready: add .loading class to show disabled state */
+.submit-btn.loading {
+  pointer-events: none;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ----------------------------------------------------------
+   10. RESPONSIVE — 1920px wide
+   ---------------------------------------------------------- */
+@media (min-width: 1920px) {
+  .create-complaint-page {
+    padding: var(--space-10) var(--space-16);
+    max-width: 1600px;
+  }
+
+  .complaint-grid {
+    gap: var(--space-8);
+  }
+}
+
+/* ----------------------------------------------------------
+   1440px
+   ---------------------------------------------------------- */
+@media (max-width: 1440px) {
+  .create-complaint-page {
+    padding: var(--space-8) var(--space-8);
+  }
+}
+
+/* ----------------------------------------------------------
+   1366px
+   ---------------------------------------------------------- */
+@media (max-width: 1366px) {
+  .create-complaint-page .page-header {
+    padding: var(--space-8) var(--space-10);
+  }
+}
+
+/* ----------------------------------------------------------
+   1280px
+   ---------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .create-complaint-page {
+    padding: var(--space-6) var(--space-6);
+    gap: var(--space-8);
+  }
+}
+
+/* ----------------------------------------------------------
+   1024px — small laptop, stack right panel below on collapse
+   ---------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .create-complaint-page {
+    padding: var(--space-6) var(--space-5);
+    gap: var(--space-8);
+  }
+
+  .create-complaint-page .page-header {
+    padding: var(--space-8);
+  }
+
+  .create-complaint-page .page-header::after {
+    right: var(--space-8);
+    font-size: 3rem;
+  }
+
+  .complaint-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .right-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+}
+
+/* ----------------------------------------------------------
+   768px — tablet portrait
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+  .create-complaint-page {
+    padding: var(--space-5) var(--space-4);
+    gap: var(--space-6);
+  }
+
+  .create-complaint-page .page-header {
+    padding: var(--space-6) var(--space-6);
+    border-radius: var(--border-radius-lg);
+  }
+
+  .create-complaint-page .page-header::after {
+    display: none;
+  }
+
+  .create-complaint-page .page-header h2 {
+    font-size: 1.375rem;
+  }
+
+  .create-complaint-page .page-header p {
+    font-size: 0.875rem;
+  }
+
+  .complaint-card,
+  .upload-card,
+  .ai-card {
+    padding: var(--space-6);
+  }
+
+  .right-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .priority-group {
+    gap: var(--space-2);
+  }
+
+  .priority {
+    padding: 9px var(--space-4);
+    font-size: 0.8125rem;
+  }
+}
+
+/* ----------------------------------------------------------
+   576px — large mobile
+   ---------------------------------------------------------- */
+@media (max-width: 576px) {
+  .create-complaint-page {
+    padding: var(--space-4) var(--space-3);
+    gap: var(--space-5);
+  }
+
+  .create-complaint-page .page-header {
+    padding: var(--space-5) var(--space-5);
+    border-radius: var(--border-radius);
+  }
+
+  .create-complaint-page .page-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .complaint-card,
+  .upload-card,
+  .ai-card {
+    padding: var(--space-5);
+    border-radius: var(--border-radius);
+  }
+
+  .priority-group {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .priority {
+    flex: 1;
+    min-width: calc(50% - var(--space-2));
+  }
+
+  .submit-btn {
+    padding: 13px var(--space-5);
+    font-size: 0.875rem;
+  }
+}
+
+/* ----------------------------------------------------------
+   480px — standard mobile
+   ---------------------------------------------------------- */
+@media (max-width: 480px) {
+  .create-complaint-page {
+    padding: var(--space-3) var(--space-3);
+  }
+
+  .create-complaint-page .page-header {
+    padding: var(--space-4) var(--space-4);
+  }
+
+  .create-complaint-page .page-header h2 {
+    font-size: 1.125rem;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 0.875rem !important;
+    padding: 10px var(--space-3) !important;
+  }
+
+  .upload-btn {
+    min-height: 110px;
+    font-size: 0.875rem;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   Reduced motion
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration:  0.01ms !important;
+  }
+}

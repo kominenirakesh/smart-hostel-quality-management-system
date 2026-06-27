@@ -46,6 +46,20 @@ const getOwnerDashboard = async (req, res, next) => {
       hostelId: { $in: hostelIds },
       priority: "high",
     });
+    const highSeverityComplaints = await Complaint.countDocuments({
+      hostelId: { $in: hostelIds },
+      "aiAnalysis.severity": "high",
+    });
+
+    const mediumSeverityComplaints = await Complaint.countDocuments({
+      hostelId: { $in: hostelIds },
+      "aiAnalysis.severity": "medium",
+    });
+
+    const lowSeverityComplaints = await Complaint.countDocuments({
+      hostelId: { $in: hostelIds },
+      "aiAnalysis.severity": "low",
+    });
 
     // ==========================
     // Hostel Wise Analytics
@@ -110,13 +124,19 @@ const getOwnerDashboard = async (req, res, next) => {
         200,
         {
           overallStats: {
-            totalHostels: hostels.length,
-            totalStudents,
-            totalComplaints,
-            pendingComplaints,
-            resolvedComplaints,
-            highPriorityComplaints,
-          },
+              totalHostels: hostels.length,
+              totalStudents,
+              totalComplaints,
+              pendingComplaints,
+              resolvedComplaints,
+              highPriorityComplaints,
+
+              aiSeverity: {
+                high: highSeverityComplaints,
+                medium: mediumSeverityComplaints,
+                low: lowSeverityComplaints,
+              },
+            },
           hostelAnalytics,
         },
         "Dashboard fetched successfully"

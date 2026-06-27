@@ -1,0 +1,633 @@
+/* ==========================================================
+   SMART HOSTEL — DASHBOARD
+   Targets exact Bootstrap class combinations from JSX.
+   Desktop-first. Fixes inline-style overrides properly.
+   ========================================================== */
+
+@import "./variables.css";
+
+/* ═══════════════════════════════════════════════════════════
+   APP SHELL
+═══════════════════════════════════════════════════════════ */
+
+body {
+  background-color: var(--bg);
+}
+
+/* The root wrapper: <div className="min-vh-100 bg-light"> */
+.min-vh-100.bg-light {
+  background: var(--bg) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NAVBAR
+   JSX: <nav className="navbar navbar-expand-lg bg-white
+         border-bottom sticky-top shadow-sm px-4 py-3">
+═══════════════════════════════════════════════════════════ */
+
+nav.navbar.sticky-top {
+  /* Override Bootstrap py-3 (24px) → compact 0 with height */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  height: 52px;
+  min-height: 52px;
+  max-height: 52px;
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: none !important;
+  /* sticky-top already sets position:sticky; top:0; z-index:1020 */
+}
+
+nav.navbar.sticky-top .container-fluid {
+  padding: 0 !important;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Brand ───────────────────────────────────────────────── */
+/* JSX: <Link className="navbar-brand d-flex align-items-center gap-2 fw-bold"> */
+
+nav.navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px !important;
+  padding: 0;
+  margin-right: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+/* JSX: <div style={{ width:44, height:44, ... }}> — inline style wins on size,
+   but we can override border-radius and font-size */
+nav.navbar .navbar-brand > div:first-child {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  flex-shrink: 0;
+}
+
+/* JSX: <div><div style={{fontSize:"18px"}}>Smart Hostel</div><small>...</small></div> */
+nav.navbar .navbar-brand > div:last-child > div {
+  font-size: 14px !important;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+nav.navbar .navbar-brand small.text-muted {
+  font-size: 11px !important;
+  color: var(--text-quaternary) !important;
+  line-height: 1;
+  font-weight: 400;
+}
+
+/* ── Search bar ──────────────────────────────────────────── */
+/* JSX: <div className="position-relative d-none d-md-block"> */
+nav.navbar .d-flex.align-items-center.ms-auto > .position-relative {
+  flex-shrink: 0;
+}
+
+/* JSX: <input className="form-control ps-5" style={{width:"260px"}}> */
+nav.navbar .form-control {
+  height: 32px !important;
+  min-height: 32px !important;
+  width: 200px !important;
+  padding: 0 12px 0 36px !important;
+  border-radius: 6px !important;
+  border: 1px solid var(--border) !important;
+  background: var(--bg-subtle) !important;
+  font-size: 13px !important;
+  color: var(--text-secondary);
+  box-shadow: none !important;
+  transition: border-color 120ms ease, background 120ms ease, width 200ms ease;
+}
+
+nav.navbar .form-control:hover {
+  border-color: var(--border-strong) !important;
+}
+
+nav.navbar .form-control:focus {
+  border-color: var(--primary) !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px var(--primary-ring) !important;
+  width: 240px !important;
+}
+
+nav.navbar .form-control::placeholder {
+  color: var(--text-quaternary);
+  font-size: 13px;
+}
+
+/* Search icon */
+nav.navbar .bi-search.position-absolute {
+  font-size: 12px !important;
+  left: 10px !important;
+  color: var(--text-quaternary) !important;
+}
+
+/* ── Notification button ─────────────────────────────────── */
+/* JSX: <button className="btn btn-light position-relative rounded-circle"> */
+nav.navbar .btn-light.rounded-circle {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--text-tertiary) !important;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+nav.navbar .btn-light.rounded-circle:hover {
+  background: var(--bg-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+nav.navbar .btn-light.rounded-circle .bi-bell {
+  font-size: 15px !important;
+}
+
+/* Notification badge */
+nav.navbar .badge.rounded-pill.bg-danger {
+  font-size: 9px !important;
+  padding: 2px 4px !important;
+  min-width: 15px !important;
+  height: 15px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+}
+
+/* ── User dropdown ───────────────────────────────────────── */
+/* JSX: <button className="btn btn-light dropdown-toggle d-flex align-items-center gap-2"> */
+nav.navbar .dropdown > .btn-light.dropdown-toggle {
+  height: 32px !important;
+  padding: 0 8px 0 4px !important;
+  gap: 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  color: var(--text-secondary) !important;
+  font-size: 13px;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+nav.navbar .dropdown > .btn-light.dropdown-toggle:hover,
+nav.navbar .dropdown > .btn-light.dropdown-toggle.show {
+  background: var(--bg-subtle) !important;
+  border-color: var(--border) !important;
+}
+
+/* JSX: <div className="rounded-circle ..." style={{ width:40, height:40, ... }}> */
+nav.navbar .dropdown-toggle .rounded-circle {
+  width: 26px !important;
+  height: 26px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  border-radius: 50% !important;
+  flex-shrink: 0;
+}
+
+/* JSX: <div className="text-start d-none d-lg-block"> */
+nav.navbar .dropdown-toggle .text-start .fw-semibold {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--text-primary) !important;
+  line-height: 1.2;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+nav.navbar .dropdown-toggle .text-start small.text-muted {
+  font-size: 11px !important;
+  color: var(--text-tertiary) !important;
+  line-height: 1;
+}
+
+nav.navbar .dropdown-toggle::after {
+  font-size: 10px;
+  margin-left: 2px;
+  color: var(--text-quaternary);
+}
+
+/* Dropdown menu */
+/* JSX: <ul className="dropdown-menu dropdown-menu-end shadow border-0"> */
+nav.navbar .dropdown-menu {
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 24px rgba(15,23,42,0.10), 0 2px 6px rgba(15,23,42,0.06) !important;
+  padding: 4px !important;
+  min-width: 176px !important;
+  background: #fff !important;
+  margin-top: 4px !important;
+}
+
+nav.navbar .dropdown-item {
+  border-radius: 6px !important;
+  padding: 7px 10px !important;
+  font-size: 13px !important;
+  color: var(--text-secondary) !important;
+  font-weight: 400 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: background 100ms ease, color 100ms ease;
+}
+
+nav.navbar .dropdown-item:hover {
+  background: var(--bg-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+nav.navbar .dropdown-item.text-danger {
+  color: var(--danger) !important;
+}
+
+nav.navbar .dropdown-item.text-danger:hover {
+  background: var(--danger-subtle) !important;
+}
+
+nav.navbar .dropdown-divider {
+  border-color: var(--border) !important;
+  margin: 3px 0 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR
+   JSX: <aside className="bg-white border-end shadow-sm d-flex flex-column"
+         style={{ width:280, minHeight:"calc(100vh-76px)", position:"sticky", top:76 }}>
+   
+   Inline styles have highest specificity — override with !important
+   where needed, or accept them and style around them.
+═══════════════════════════════════════════════════════════ */
+
+/* Target the aside by its exact Bootstrap classes */
+aside.bg-white.border-end.d-flex.flex-column {
+  width: 220px !important;
+  min-width: 220px !important;
+  /* top & minHeight from inline style — override with !important */
+  top: 52px !important;
+  min-height: calc(100svh - 52px) !important;
+  background: #ffffff !important;
+  border-right: 1px solid var(--border) !important;
+  box-shadow: none !important;
+  /* Keep sticky positioning from inline style */
+  position: sticky !important;
+  align-self: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ── Sidebar header ──────────────────────────────────────── */
+/* JSX: <div className="p-4 border-bottom"> */
+aside.bg-white.border-end.d-flex.flex-column > div.p-4.border-bottom {
+  padding: 14px 14px 12px !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+aside.bg-white.border-end.d-flex.flex-column > div.p-4.border-bottom h6 {
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  color: var(--text-quaternary) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  margin-bottom: 2px !important;
+}
+
+aside.bg-white.border-end.d-flex.flex-column > div.p-4.border-bottom small {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+}
+
+/* ── Sidebar nav ─────────────────────────────────────────── */
+/* JSX: <nav className="p-3 flex-grow-1"> */
+aside.bg-white.border-end.d-flex.flex-column > nav.p-3 {
+  padding: 10px !important;
+  flex: 1;
+}
+
+/* JSX: NavLink renders as <a> with classes like
+   "d-flex align-items-center gap-3 text-decoration-none px-3 py-3 rounded-3 mb-2 bg-primary text-white"
+   or "... text-dark"
+   Target all anchor children of this nav */
+aside.bg-white.border-end.d-flex.flex-column > nav.p-3 a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 8px 10px !important;
+  border-radius: 8px !important;
+  margin-bottom: 2px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  color: var(--text-tertiary) !important;
+  border: 1px solid transparent;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+aside.bg-white.border-end.d-flex.flex-column > nav.p-3 a:hover {
+  background: var(--bg-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Active: Bootstrap adds "bg-primary text-white" classes */
+aside.bg-white.border-end.d-flex.flex-column > nav.p-3 a.bg-primary {
+  background: var(--primary-muted) !important;
+  color: var(--primary) !important;
+  border-color: rgba(37, 99, 235, 0.14) !important;
+  font-weight: 600 !important;
+}
+
+aside.bg-white.border-end.d-flex.flex-column > nav.p-3 a.bg-primary i,
+aside.bg-white.border-end.d-flex.flex-column > nav.p-3 a.bg-primary .bi {
+  color: var(--primary) !important;
+  opacity: 1 !important;
+}
+
+/* Icons inside nav links */
+aside.bg-white.border-end.d-flex.flex-column > nav.p-3 a i {
+  font-size: 15px !important;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+aside.bg-white.border-end.d-flex.flex-column > nav.p-3 a span {
+  font-size: 13px !important;
+  line-height: 1;
+}
+
+/* Kill the old stat-card::before blue bar that's bleeding through */
+aside.bg-white.border-end.d-flex.flex-column > nav.p-3 a::before,
+aside.bg-white.border-end.d-flex.flex-column > nav.p-3 a::after {
+  display: none !important;
+  content: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: none !important;
+}
+
+/* ── Sidebar footer ──────────────────────────────────────── */
+/* JSX: <div className="border-top p-3"> */
+aside.bg-white.border-end.d-flex.flex-column > div.border-top.p-3 {
+  border-top: 1px solid var(--border) !important;
+  padding: 10px !important;
+}
+
+/* JSX: <div className="rounded-3 p-3 bg-light"> */
+aside.bg-white.border-end.d-flex.flex-column > div.border-top.p-3 > div {
+  border-radius: 8px !important;
+  padding: 10px 12px !important;
+  background: var(--bg-subtle) !important;
+}
+
+aside.bg-white.border-end.d-flex.flex-column > div.border-top.p-3 .fw-semibold {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+}
+
+aside.bg-white.border-end.d-flex.flex-column > div.border-top.p-3 small {
+  font-size: 11px !important;
+  color: var(--text-tertiary) !important;
+  line-height: 1.4;
+  display: block;
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MAIN CONTENT
+   JSX: <main className="flex-grow-1"
+         style={{ minHeight:"calc(100vh-76px)", padding:"32px",
+                  overflowX:"hidden", background:"#f8fafc" }}>
+   
+   The inline style sets padding:32px and background:#f8fafc.
+   We override with !important.
+═══════════════════════════════════════════════════════════ */
+
+main.flex-grow-1 {
+  padding: 24px !important;
+  background: var(--bg) !important;
+  min-height: calc(100svh - 52px) !important;
+  overflow-x: hidden;
+  flex: 1;
+}
+
+/* ── Inner content card ──────────────────────────────────── */
+/* JSX: <div className="bg-white rounded-4 shadow-sm"
+         style={{ minHeight:"100%", padding:"30px", border:"1px solid #e5e7eb" }}> */
+main.flex-grow-1 > div.bg-white.rounded-4 {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  min-height: unset !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DASHBOARD LAYOUT UTILITIES
+═══════════════════════════════════════════════════════════ */
+
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.dashboard-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.dashboard-subtitle {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.dashboard-grid   { display: grid; gap: 16px; }
+.dashboard-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.dashboard-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.dashboard-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.dashboard-grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.dashboard-surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.dashboard-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   KILL ROGUE PSEUDO-ELEMENTS
+   The old stat-card::before / metric-card::after from previous
+   components.css are causing blue vertical bars on sidebar links.
+═══════════════════════════════════════════════════════════ */
+
+/* Ensure stat-card bar is only on actual stat cards, not nav */
+.stat-card::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Only restore the bar if explicitly needed */
+.stat-card.has-bar::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--primary);
+  border-radius: 3px 0 0 3px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+
+/* 1280px */
+@media (max-width: 1279.98px) {
+  .dashboard-grid-4 { grid-template-columns: repeat(2, 1fr); }
+
+  nav.navbar .form-control {
+    width: 180px !important;
+  }
+}
+
+/* 1024px */
+@media (max-width: 1023.98px) {
+  aside.bg-white.border-end.d-flex.flex-column {
+    width: 192px !important;
+    min-width: 192px !important;
+  }
+
+  .dashboard-grid-3 { grid-template-columns: repeat(2, 1fr); }
+
+  nav.navbar .dropdown-toggle .text-start {
+    display: none !important;
+  }
+
+  nav.navbar .form-control {
+    width: 150px !important;
+  }
+}
+
+/* 768px — tablet portrait: sidebar becomes horizontal strip */
+@media (max-width: 767.98px) {
+  /* Stack layout */
+  .d-flex.align-items-stretch,
+  div.d-flex:has(aside) {
+    flex-direction: column !important;
+  }
+
+  aside.bg-white.border-end.d-flex.flex-column {
+    width: 100% !important;
+    min-width: 100% !important;
+    min-height: unset !important;
+    position: static !important;
+    top: auto !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    align-self: auto !important;
+  }
+
+  aside.bg-white.border-end.d-flex.flex-column > div.p-4.border-bottom,
+  aside.bg-white.border-end.d-flex.flex-column > div.border-top.p-3 {
+    display: none !important;
+  }
+
+  aside.bg-white.border-end.d-flex.flex-column > nav.p-3 {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 4px !important;
+    padding: 8px 12px !important;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  aside.bg-white.border-end.d-flex.flex-column > nav.p-3 a {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    margin-bottom: 0 !important;
+    padding: 6px 12px !important;
+  }
+
+  main.flex-grow-1 {
+    min-height: unset !important;
+    padding: 16px !important;
+  }
+
+  .dashboard-grid-2,
+  .dashboard-grid-3,
+  .dashboard-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  nav.navbar .form-control,
+  nav.navbar .position-relative.d-none {
+    display: none !important;
+  }
+}
+
+/* 576px — mobile */
+@media (max-width: 575.98px) {
+  nav.navbar.sticky-top {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  nav.navbar .navbar-brand small.text-muted {
+    display: none !important;
+  }
+
+  main.flex-grow-1 {
+    padding: 12px !important;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-grid-2 { grid-template-columns: 1fr; }
+}
