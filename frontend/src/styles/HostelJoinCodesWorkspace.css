@@ -1,0 +1,312 @@
+/* ===========================================================
+   HostelJoinCodesWorkspace.css
+   Premium Enterprise Design
+=========================================================== */
+
+.workspace-card {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 32px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e7edf5;
+}
+
+.workspace-header {
+  margin-bottom: 32px;
+}
+
+.workspace-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.workspace-header p {
+  color: #64748b;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+/* ===========================================================
+   Empty State
+=========================================================== */
+
+.empty-state {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #64748b;
+  text-align: center;
+  gap: 12px;
+}
+
+.empty-state svg {
+  color: #4f46e5;
+}
+
+.empty-state h3 {
+  color: #111827;
+}
+
+.empty-state p {
+  max-width: 340px;
+}
+
+/* ===========================================================
+   Hostel Grid
+=========================================================== */
+
+.join-code-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 26px;
+}
+
+/* ===========================================================
+   Card
+=========================================================== */
+
+.join-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+  padding: 24px;
+  transition: 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.join-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.08);
+}
+
+/* ===========================================================
+   Card Header
+=========================================================== */
+
+.join-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.join-card-header h3 {
+  font-size: 1.35rem;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.join-card-header p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: .92rem;
+}
+
+.join-card-header svg {
+  color: #4f46e5;
+}
+
+/* ===========================================================
+   Status
+=========================================================== */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: .84rem;
+  font-weight: 600;
+}
+
+.status.active {
+  background: #ecfdf5;
+  color: #16a34a;
+}
+
+.status.inactive {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* ===========================================================
+   Join Code Box
+=========================================================== */
+
+.join-code-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eef2ff;
+  border: 1px solid #dbe4ff;
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.join-code-box span {
+  display: block;
+  color: #64748b;
+  margin-bottom: 6px;
+  font-size: .85rem;
+}
+
+.join-code-box strong {
+  font-size: 1.4rem;
+  color: #4f46e5;
+  letter-spacing: 1px;
+}
+
+.join-code-box button {
+  border: none;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: .25s;
+}
+
+.join-code-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(79, 70, 229, .25);
+}
+
+/* ===========================================================
+   Statistics
+=========================================================== */
+
+.join-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.join-info-grid > div {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  border: 1px solid #edf2f7;
+}
+
+.join-info-grid svg {
+  color: #4f46e5;
+  margin-bottom: 10px;
+}
+
+.join-info-grid span {
+  display: block;
+  color: #64748b;
+  font-size: .84rem;
+}
+
+.join-info-grid strong {
+  display: block;
+  margin-top: 8px;
+  color: #111827;
+  font-size: 1.15rem;
+}
+
+/* ===========================================================
+   Supervisor
+=========================================================== */
+
+.supervisor-box {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: #f8fafc;
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid #edf2f7;
+}
+
+.supervisor-box svg {
+  color: #4f46e5;
+  min-width: 22px;
+}
+
+.supervisor-box span {
+  color: #64748b;
+  display: block;
+  font-size: .82rem;
+}
+
+.supervisor-box strong {
+  display: block;
+  color: #111827;
+  margin: 5px 0;
+}
+
+.supervisor-box small {
+  color: #94a3b8;
+}
+
+/* ===========================================================
+   Responsive
+=========================================================== */
+
+@media (max-width: 992px) {
+
+  .join-code-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .workspace-card {
+    padding: 22px;
+  }
+
+  .join-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .join-code-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .join-code-box button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .join-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .workspace-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .join-card {
+    padding: 18px;
+  }
+
+  .join-code-box strong {
+    font-size: 1.15rem;
+  }
+
+}

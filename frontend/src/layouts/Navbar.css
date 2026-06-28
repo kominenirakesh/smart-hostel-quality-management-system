@@ -1,0 +1,249 @@
+/* ==========================================================
+   STUDENT NAVBAR
+========================================================== */
+
+.student-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  width: 100%;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.05);
+}
+
+.student-navbar-container {
+  max-width: 1440px;
+
+  margin: 0 auto;
+
+  height: 78px;
+
+  padding: 0 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+/* ==========================================================
+   LOGO
+========================================================== */
+
+.student-logo {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+.student-logo-icon {
+  width: 52px;
+
+  height: 52px;
+
+  border-radius: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #ffffff;
+
+  background: linear-gradient(
+      135deg,
+      #4f46e5,
+      #6366f1
+  );
+
+  box-shadow: 0 12px 24px rgba(79, 70, 229, 0.28);
+
+  transition: .25s ease;
+}
+
+.student-logo:hover .student-logo-icon {
+
+  transform: rotate(-6deg) scale(1.05);
+
+}
+
+.student-logo-text {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.student-logo-text h2 {
+  margin: 0;
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+
+  color: #111827;
+
+  line-height: 1.2;
+}
+
+.student-logo-text span {
+  margin-top: 2px;
+
+  font-size: .82rem;
+
+  color: #64748b;
+
+  font-weight: 500;
+}
+
+/* ==========================================================
+   LOGOUT BUTTON
+========================================================== */
+
+.student-logout-btn {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  border: none;
+
+  outline: none;
+
+  cursor: pointer;
+
+  padding: 12px 22px;
+
+  border-radius: 14px;
+
+  font-size: .95rem;
+
+  font-weight: 600;
+
+  color: #ffffff;
+
+  background: linear-gradient(
+      135deg,
+      #ef4444,
+      #dc2626
+  );
+
+  transition: .25s ease;
+
+  box-shadow: 0 10px 24px rgba(239, 68, 68, .22);
+}
+
+.student-logout-btn:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 16px 30px rgba(239, 68, 68, .30);
+
+}
+
+.student-logout-btn:active {
+
+  transform: scale(.98);
+
+}
+
+.student-logout-btn svg {
+
+  flex-shrink: 0;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 992px) {
+
+  .student-navbar-container {
+
+    padding: 0 22px;
+
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .student-navbar-container {
+
+    height: 72px;
+
+    padding: 0 18px;
+
+  }
+
+  .student-logo-icon {
+
+    width: 46px;
+
+    height: 46px;
+
+  }
+
+  .student-logo-text h2 {
+
+    font-size: 1.05rem;
+
+  }
+
+  .student-logo-text span {
+
+    font-size: .75rem;
+
+  }
+
+  .student-logout-btn {
+
+    padding: 10px 16px;
+
+    font-size: .88rem;
+
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .student-navbar-container {
+
+    padding: 0 14px;
+
+  }
+
+  .student-logo-text span {
+
+    display: none;
+
+  }
+
+  .student-logout-btn {
+
+    padding: 10px 14px;
+
+  }
+
+  .student-logout-btn span {
+
+    display: none;
+
+  }
+
+}

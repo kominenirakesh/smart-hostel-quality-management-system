@@ -31,38 +31,38 @@ const Login = () => {
     try {
   const response = await api.post("/users/login", formData);
   
-const token = response.data.data.token;
-   console.log("First"+ " "+response.data.data.token);
+const { token, user } = response.data.data;
 
 // Store JWT
 sessionStorage.setItem("token", token);
 
-// Decode JWT (because your backend only returns the token)
-const payload = JSON.parse(atob(token.split(".")[1]));
-
-const user = {
-    id: payload.id,
-    role: payload.role,
-    email: formData.email,
-};
-
+// Store logged in user
 login(user);
 
 // Redirect based on role
 switch (user.role) {
-    case "owner":
-        navigate("/owner/dashboard");
-        break;
 
-    case "supervisor":
-        navigate("/supervisor/dashboard");
-        break;
+  case "owner":
+    navigate("/owner/dashboard");
+    break;
 
-    default:
-        navigate("/student/dashboard");
+  case "supervisor":
+    navigate("/supervisor/dashboard");
+    break;
+
+  case "student":
+
+    if (user.hostelId) {
+      navigate("/student/dashboard");
+    } else {
+      navigate("/student/join-hostel");
+    }
+
+    break;
+
+  default:
+    navigate("/");
 }
-
-      console.log("Login Payload:", formData);
 
     } catch (err) {
       console.error(err);

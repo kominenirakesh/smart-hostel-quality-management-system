@@ -1,0 +1,214 @@
+/* ==========================================================
+   Student Join Hostel
+   Premium Enterprise Design
+========================================================== */
+
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --success: #16a34a;
+  --background: #f4f7fb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #64748b;
+  --border: #e5e7eb;
+  --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  --radius: 22px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.join-hostel-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 45%, #ffffff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* ==========================================================
+   Main Card
+========================================================== */
+
+.join-card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* ==========================================================
+   Header
+========================================================== */
+
+.join-header {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  text-align: center;
+  padding: 40px 35px;
+}
+
+.join-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.join-header p {
+  opacity: .95;
+  line-height: 1.7;
+  font-size: .96rem;
+}
+
+/* ==========================================================
+   Form
+========================================================== */
+
+.join-card form {
+  padding: 35px;
+}
+
+.join-card label {
+  display: block;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.join-card input {
+  width: 100%;
+  height: 56px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0 18px;
+  font-size: 1rem;
+  transition: .25s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.join-card input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(79,70,229,.12);
+}
+
+.join-card input::placeholder {
+  color: #94a3b8;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* ==========================================================
+   Join Button
+========================================================== */
+
+.join-card button {
+  width: 100%;
+  height: 56px;
+  margin-top: 28px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary), #6366f1);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.join-card button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(79,70,229,.25);
+}
+
+.join-card button:disabled {
+  cursor: not-allowed;
+  opacity: .75;
+}
+
+/* ==========================================================
+   Information Box
+========================================================== */
+
+.join-info {
+  margin-top: 28px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.join-info h4 {
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.join-info p {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: .92rem;
+}
+
+/* ==========================================================
+   Success Message
+========================================================== */
+
+.success-box {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  color: var(--success);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ==========================================================
+   Error Message
+========================================================== */
+
+.error-box {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media (max-width: 768px) {
+
+  .join-hostel-page {
+    padding: 20px;
+  }
+
+  .join-header {
+    padding: 30px 24px;
+  }
+
+  .join-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .join-card form {
+    padding: 24px;
+  }
+
+}

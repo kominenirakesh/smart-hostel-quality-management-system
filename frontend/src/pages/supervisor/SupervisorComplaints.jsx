@@ -30,7 +30,7 @@ const SupervisorComplaints = () => {
       }
 
       const response = await api.get(
-        "/complaints/supervisor?page=1&limit=10",
+        "/complaints/supervisor?page=1&limit=100",
         {
           headers: {
             Authorization: token,
@@ -186,11 +186,11 @@ const SupervisorComplaints = () => {
 
         )}
 
-        {pagination && (
+        {/* {pagination && (
           <div className="pagination-info">
             Page {pagination.currentPage} of {pagination.totalPages}
           </div>
-        )}
+        )} */}
 
       </div>
 

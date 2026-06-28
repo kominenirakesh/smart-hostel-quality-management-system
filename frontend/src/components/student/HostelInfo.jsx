@@ -1,41 +1,80 @@
-import { useAuth } from "../../context/AuthContext";
-import "../../pages/student/StudentDashboard.css"
-const HostelInfo = ({ hostel }) => {
-  const { user } = useAuth();
+import "../../pages/student/StudentDashboard.css";
 
-  const hostelName = hostel?.name || user?.hostel?.name || "GRIET Boys Hostel";
-  const hostelCode = hostel?.code || user?.hostel?.code || "HOST-1024";
-  const status = hostel?.status || "Connected";
+const HostelInfo = ({ hostel }) => {
+
+  if (!hostel) {
+    return null;
+  }
 
   return (
     <section className="dashboard-section">
+
       <div className="section-heading">
         <div>
-          <h2 className="section-title">Your hostel connection details</h2>
+          <h2 className="section-title">
+            Your Hostel Information
+          </h2>
         </div>
       </div>
 
       <div className="hostel-info-grid">
+
+        {/* Hostel Name */}
+
         <div className="card soft-card hostel-info-card">
+
           <small>Hostel Name</small>
-          <h3>{hostelName}</h3>
-          <p>Connected to your current student account.</p>
+
+          <h3>{hostel.hostelName}</h3>
+
+          <p>
+            {hostel.address}, {hostel.city}
+          </p>
+
         </div>
 
+        {/* Join Code */}
+
         <div className="card soft-card hostel-info-card">
+
           <small>Join Code</small>
-          <h3>{hostelCode}</h3>
-          <p>Share this code only when joining a new hostel.</p>
+
+          <h3>{hostel.joinCode}</h3>
+
+          <p>
+            Use this code only when joining this hostel.
+          </p>
+
         </div>
 
+        {/* Status */}
+
         <div className="card soft-card hostel-info-card">
+
           <small>Status</small>
-          <h3 className="status-active">{status}</h3>
-          <p>Your hostel is active and complaint tracking is enabled.</p>
+
+          <h3
+            className={
+              hostel.status === "Active"
+                ? "status-active"
+                : "status-inactive"
+            }
+          >
+            {hostel.status}
+          </h3>
+
+          <p>
+            Complaint tracking is currently{" "}
+            {hostel.status.toLowerCase()}.
+          </p>
+
         </div>
+
       </div>
+
     </section>
   );
+
 };
 
 export default HostelInfo;

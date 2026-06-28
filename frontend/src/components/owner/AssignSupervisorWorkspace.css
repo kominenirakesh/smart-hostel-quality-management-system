@@ -1,0 +1,370 @@
+/* ==========================================================
+   AssignSupervisorWorkspace.css
+   Premium Enterprise Workspace
+========================================================== */
+
+:root{
+  --primary:#4f46e5;
+  --primary-dark:#4338ca;
+  --primary-soft:#eef2ff;
+  --success:#16a34a;
+  --card:#ffffff;
+  --border:#e7edf5;
+  --text:#111827;
+  --muted:#64748b;
+  --shadow:0 14px 36px rgba(15,23,42,.06);
+  --radius:24px;
+}
+
+.workspace-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.workspace-header{
+  padding:34px 36px;
+  background:linear-gradient(135deg,#4f46e5,#6366f1);
+  color:#fff;
+  position:relative;
+}
+
+.workspace-header::after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  right:-80px;
+  top:-80px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+}
+
+.workspace-header h2{
+  margin:0 0 10px;
+  font-size:2rem;
+  font-weight:800;
+}
+
+.workspace-header p{
+  margin:0;
+  max-width:700px;
+  line-height:1.7;
+  color:rgba(255,255,255,.92);
+}
+
+.workspace-form{
+  padding:36px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.workspace-form label{
+  font-weight:700;
+  color:var(--text);
+}
+
+.workspace-form input,
+.workspace-form select{
+  width:100%;
+  padding:16px 18px;
+  border:1px solid #dbe3f0;
+  border-radius:16px;
+  font-size:.96rem;
+  transition:.25s;
+}
+
+.workspace-form input:focus,
+.workspace-form select:focus{
+  outline:none;
+  border-color:var(--primary);
+  box-shadow:0 0 0 4px rgba(79,70,229,.12);
+}
+
+.primary-btn{
+  width:250px;
+  margin-top:10px;
+  padding:16px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 14px 28px rgba(79,70,229,.20);
+}
+
+.primary-btn:hover{
+  transform:translateY(-2px);
+}
+
+.primary-btn:disabled{
+  opacity:.75;
+  cursor:not-allowed;
+}
+
+.hostel-success-card{
+  margin:0 36px 36px;
+  border:1px solid #d8f0df;
+  border-radius:22px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 10px 24px rgba(22,163,74,.06);
+}
+
+.success-banner{
+  background:linear-gradient(135deg,#16a34a,#22c55e);
+  color:#fff;
+  padding:18px 24px;
+  font-weight:700;
+}
+
+.hostel-details-grid{
+  padding:26px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+}
+
+.detail-box{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+}
+
+.detail-box span{
+  display:block;
+  margin-bottom:8px;
+  color:var(--muted);
+  font-size:.8rem;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.detail-box strong{
+  font-size:1.05rem;
+  color:var(--text);
+  word-break:break-word;
+}
+
+.management-note{
+  margin:0 26px 26px;
+  padding:18px;
+  background:#eef2ff;
+  border:1px solid #dbe4ff;
+  border-radius:18px;
+  line-height:1.8;
+  color:#374151;
+}
+
+.management-note code{
+  background:#fff;
+  padding:2px 6px;
+  border-radius:6px;
+  color:#4338ca;
+}
+
+@media(max-width:768px){
+  .workspace-header,
+  .workspace-form{
+    padding:22px;
+  }
+
+  .hostel-success-card{
+    margin:0 22px 22px;
+  }
+
+  .hostel-details-grid{
+    grid-template-columns:1fr;
+    padding:20px;
+  }
+
+  .management-note{
+    margin:0 20px 20px;
+  }
+
+  .primary-btn{
+    width:100%;
+  }
+
+  .workspace-header h2{
+    font-size:1.6rem;
+  }
+}
+
+/* =========================================================
+   AssignSupervisor – additional utility classes
+========================================================= */
+
+/* Loading */
+.as-loading-body {
+  padding: 60px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: var(--muted);
+}
+
+.as-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e7edf5;
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error body */
+.as-error-body {
+  padding: 48px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.as-error-msg {
+  color: #dc2626;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Notice banner (no supervisors) */
+.as-notice {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 16px;
+  padding: 18px 22px;
+  color: #92400e;
+  font-weight: 600;
+}
+
+/* Banner layout */
+.success-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.banner-name {
+  font-size: 1.05rem;
+}
+
+.banner-city {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  font-weight: 500;
+}
+
+/* Supervisor section label */
+.as-section-label {
+  margin: 0 0 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+/* Already-assigned block */
+.as-assigned-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.as-assigned-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.as-assigned-info strong {
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.as-assigned-info span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.as-badge-assigned {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: #dcfce7;
+  color: var(--success);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Assign row: dropdown + button */
+.as-assign-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.as-assign-row select {
+  flex: 1;
+  min-width: 220px;
+}
+
+.as-assign-row .primary-btn {
+  width: auto;
+  white-space: nowrap;
+  margin-top: 0;
+}
+
+/* Inline feedback */
+.as-feedback {
+  margin: 12px 0 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+.as-feedback--ok {
+  background: #dcfce7;
+  color: var(--success);
+}
+
+.as-feedback--err {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+@media (max-width: 768px) {
+  .as-assign-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .as-assign-row select {
+    min-width: 0;
+  }
+
+  .as-assign-row .primary-btn {
+    width: 100%;
+  }
+}

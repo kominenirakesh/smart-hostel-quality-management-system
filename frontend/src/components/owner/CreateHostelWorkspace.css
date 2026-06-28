@@ -1,0 +1,211 @@
+/* ==========================================================
+   CreateHostelWorkspace.css
+   Premium Enterprise Workspace
+========================================================== */
+
+:root{
+  --primary:#4f46e5;
+  --primary-dark:#4338ca;
+  --primary-soft:#eef2ff;
+  --success:#16a34a;
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --border:#e7edf5;
+  --text:#111827;
+  --muted:#64748b;
+  --shadow:0 14px 36px rgba(15,23,42,.06);
+  --radius:24px;
+}
+
+.workspace-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.workspace-header{
+  padding:34px 36px;
+  background:linear-gradient(135deg,#4f46e5,#6366f1);
+  color:#fff;
+  position:relative;
+}
+
+.workspace-header::after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  right:-80px;
+  top:-80px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+}
+
+.workspace-header h2{
+  margin:0 0 10px;
+  font-size:2rem;
+  font-weight:800;
+}
+
+.workspace-header p{
+  margin:0;
+  max-width:720px;
+  line-height:1.7;
+  color:rgba(255,255,255,.92);
+}
+
+.workspace-form{
+  padding:36px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.workspace-form label{
+  font-weight:700;
+  color:var(--text);
+  font-size:.92rem;
+}
+
+.workspace-form input,
+.workspace-form textarea{
+  width:100%;
+  padding:16px 18px;
+  border:1px solid #dbe3f0;
+  border-radius:16px;
+  background:#fff;
+  font-size:.96rem;
+  transition:.25s;
+}
+
+.workspace-form textarea{
+  min-height:150px;
+  resize:vertical;
+}
+
+.workspace-form input:focus,
+.workspace-form textarea:focus{
+  outline:none;
+  border-color:var(--primary);
+  box-shadow:0 0 0 4px rgba(79,70,229,.12);
+}
+
+.primary-btn{
+  margin-top:10px;
+  width:240px;
+  padding:16px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  color:#fff;
+  font-size:.97rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 14px 28px rgba(79,70,229,.20);
+}
+
+.primary-btn:hover{
+  transform:translateY(-2px);
+}
+
+.primary-btn:disabled{
+  opacity:.75;
+  cursor:not-allowed;
+}
+
+.hostel-success-card{
+  margin:0 36px 36px;
+  border:1px solid #d8f0df;
+  border-radius:22px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 10px 24px rgba(22,163,74,.06);
+}
+
+.success-banner{
+  background:linear-gradient(135deg,#16a34a,#22c55e);
+  color:#fff;
+  padding:18px 24px;
+  font-size:1rem;
+  font-weight:700;
+}
+
+.hostel-details-grid{
+  padding:26px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+
+.detail-box{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+}
+
+.detail-box span{
+  display:block;
+  color:var(--muted);
+  font-size:.82rem;
+  margin-bottom:8px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.detail-box strong{
+  color:var(--text);
+  font-size:1.08rem;
+  word-break:break-word;
+}
+
+.join-code-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-top:4px;
+}
+
+.copy-btn{
+  border:none;
+  background:var(--primary-soft);
+  color:var(--primary-dark);
+  padding:8px 12px;
+  border-radius:12px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.copy-btn:hover{
+  background:var(--primary);
+  color:#fff;
+}
+
+@media(max-width:768px){
+  .workspace-header,
+  .workspace-form{
+    padding:22px;
+  }
+
+  .hostel-success-card{
+    margin:0 22px 22px;
+  }
+
+  .hostel-details-grid{
+    grid-template-columns:1fr;
+    padding:20px;
+  }
+
+  .primary-btn{
+    width:100%;
+  }
+
+  .workspace-header h2{
+    font-size:1.6rem;
+  }
+}
