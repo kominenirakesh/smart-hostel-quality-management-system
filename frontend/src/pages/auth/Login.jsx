@@ -31,46 +31,46 @@ const Login = () => {
     try {
   const response = await api.post("/users/login", formData);
   
-const { token, user } = response.data.data;
+      const { token, user } = response.data.data;
 
-// Store JWT
-sessionStorage.setItem("token", token);
+      // Store JWT
+      sessionStorage.setItem("token", token);
 
-// Store logged in user
-login(user);
+      // Store logged in user
+      login(user);
 
-// Redirect based on role
-switch (user.role) {
+      // Redirect based on role
+      switch (user.role) {
 
-  case "owner":
-    navigate("/owner/dashboard");
-    break;
+        case "owner":
+          navigate("/owner/dashboard");
+          break;
 
-  case "supervisor":
-    navigate("/supervisor/dashboard");
-    break;
+        case "supervisor":
+          navigate("/supervisor/dashboard");
+          break;
 
-  case "student":
+        case "student":
 
-    if (user.hostelId) {
-      navigate("/student/dashboard");
-    } else {
-      navigate("/student/join-hostel");
-    }
+          if (user.hostelId) {
+            navigate("/student/dashboard");
+          } else {
+            navigate("/student/join-hostel");
+          }
 
-    break;
+          break;
 
-  default:
-    navigate("/");
-}
+        default:
+          navigate("/");
+      }
 
-    } catch (err) {
-      console.error(err);
-      alert("Login failed.");
-    } finally {
-      setLoading(false);
-    }
-  };
+          } catch (err) {
+            console.error(err);
+            alert("Login failed.");
+          } finally {
+            setLoading(false);
+          }
+        };
 
   return (
     <section className="auth-page">
