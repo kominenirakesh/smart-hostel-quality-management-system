@@ -46,60 +46,63 @@ next(error);
 };
 
 const loginUser = async (req, res, next) => {
-try {
-const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
+    if (!email || !password) {
+      return next(
+        new ApiError(400, "Email and Password are required")
+      );
+    }
 
-if (!email || !password) {
-  return next(
-    new ApiError(400, "Email and Password are required")
-  );
-}
+    const user = await User.findOne({ email });
 
-const user = await User.findOne({ email });
+    if (!user) {
+      return next(
+        new ApiError(404, "User not found")
+      );
+    }
 
-if (!user) {
-  return next(
-    new ApiError(404, "User not found")
-  );
-}
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user.password
+    );
 
-const isPasswordCorrect = await bcrypt.compare(
-  password,
-  user.password
-);
+    if (!isPasswordCorrect) {
+      return next(
+        new ApiError(401, "Invalid Credentials")
+      );
+    }
 
-if (!isPasswordCorrect) {
-  return next(
-    new ApiError(401, "Invalid Credentials")
-  );
-}
+    const token = jwt.sign(
+      {
+        id: user._id,
+        role: user.role,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
 
-const token = jwt.sign(
-  {
-    id: user._id,
-    role: user.role,
-  },
-  process.env.JWT_SECRET,
-  {
-    expiresIn: "7d",
+    const createdUser = await User.findById(user._id)
+      .select("-password");
+
+    return res.status(200).json(
+      new ApiResponse(
+        200,
+        {
+          token,
+          user: createdUser,
+        },
+        "Login Successful"
+      )
+    );
+
+  } catch (error) {
+    next(error);
   }
-);
-
-return res.status(200).json(
-  new ApiResponse(
-    200,
-    { token },
-    "Login Successful"
-  )
-);
-
-
-} catch (error) {
-next(error);
-}
 };
-
 const getProfile = async (req, res, next) => {
 try {
 return res.status(200).json(
@@ -113,9 +116,26 @@ req.user,
 next(error);
 }
 };
+const getAllSupervisors = async (req, res, next) => {
+  try {
+    const supervisors = await User.find(
+      { role: "supervisor" },
+      "name email"
+    ).sort({ name: 1 });
 
+    return res.status(200).json(
+      new ApiResponse(
+        200,
+        supervisors,
+        "Supervisors fetched successfully"
+      )
+    );
+  } catch (error) {
+    next(error);
+  }
+};
 export {
 registerUser,
 loginUser,
-getProfile
+getProfile,getAllSupervisors
 };

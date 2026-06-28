@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registerUser,loginUser, getProfile } from "../controllers/user.controller.js";
+import { registerUser,loginUser, getProfile ,getAllSupervisors} from "../controllers/user.controller.js";
 import verifyJWT from "../middleware/auth.middleware.js";
 import authorizeRoles from "../middleware/role.middleware.js";
 
@@ -13,6 +13,7 @@ const router = Router();
 router.post("/register",registerUser);
 router.post("/login",loginUser);
 router.get("/profile", verifyJWT, getProfile);
+router.get("/supervisors",verifyJWT,authorizeRoles("owner"),getAllSupervisors);
 router.get(
   "/owner-test",
   verifyJWT,
